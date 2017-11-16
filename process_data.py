@@ -11,7 +11,7 @@ from collections import Counter
 
 sys.path.append('..')
 
-DOWNLOAD_URL = 'http://mattmahoney.net/dc'
+DOWNLOAD_URL = 'http://mattmahoney.net/dc/'
 EXPECTED_BYTES = 31344016
 DATA_FOLDER = 'data/'
 FILE_NAME = 'text8.zip'
@@ -34,7 +34,7 @@ def download(file_name, expected_bytes):
 
 def read_data(file_path):
     with zipfile.ZipFile(file_path) as f:
-        words = tf.compat.as_str(f.read(f.namelist()[0]).split())
+        words = tf.compat.as_str(f.read(f.namelist()[0])).split()
     return words
 
 
@@ -82,7 +82,7 @@ def process_data(vocab_size, batch_size, skip_window):
     dictionary, _ = build_vocab(words, vocab_size)
     index_words = convert_words_to_index(words, dictionary)
     del words
-    single_gen = generate_sample(index_words, batch_size)
+    single_gen = generate_sample(index_words, skip_window)
     return get_batch(single_gen, batch_size)
 
 def get_index_vocab(vocab_size):
